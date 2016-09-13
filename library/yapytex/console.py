@@ -3,11 +3,10 @@ from colorama import init, Fore, Back, Style
 from library.yapytex import colors
 
 init()
-#_Token = r'\033[{0}m'
-ConsInfo=Fore.CYAN #_Token.format(colors.Cyan)
-ConsWarning=Fore.YELLOW#_Token.format(colors.Yellow)
-ConsError=Fore.RED#_Token.format(colors.LightRed)
-Native=Fore.RESET#_Token.format('')
+ConsInfo=Fore.CYAN
+ConsWarning=Fore.YELLOW
+ConsError=Fore.RED
+Native=Fore.RESET
 
 def _write(decorator,*args):
   if decorator in [Native,ConsInfo]:
@@ -16,7 +15,6 @@ def _write(decorator,*args):
     stream = sys.stderr
   stream.write(decorator)
   print(*args,end='',file=stream)
-  #stream.write(Native)
 
 def _writeln(decorator,*args):
   nargs= args + (Native,'\n',)
