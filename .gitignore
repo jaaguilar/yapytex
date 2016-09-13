@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#tex and pdf files
+.tex
+.pdf
+
 # C extensions
 *.so
 
