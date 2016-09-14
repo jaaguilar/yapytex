@@ -83,8 +83,17 @@ tex.add_list_item(items)
 
 tex.add_subsection('enumeración partida','primero 5 items, y luego otros 5... ¿cuantos items?')
 
-items = [fake.name() for i in range(5)]
+items = [fake.name() for i in range(3)]
 tex.add_enumeration(items,close=False)
+
+tex.add_paragraph("""
+Este es un ejemplo, claramente, de un párrafo cuyo cuerpo está dentro (inside) de un item (item)
+dentro de una enumeración. Gracias por leer atentamente.
+Aprovecho para poner un acrónimo {0}
+""".format(tex.add_glos_entry('HTML','Hyper Text Markup Language')))
+
+items = [fake.name() for i in range(2)]
+tex.add_enumeration(items,ccontinue=True,close=False)
 
 
 #enumeration inside enumeration
