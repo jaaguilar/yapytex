@@ -164,9 +164,7 @@ class YaPyTexLibrary(object):
         _cmd.usenumerate,
         _cmd.usehyperref,
       ]
-      print('aqui llega',self._hook_load_packages)
       if self._hook_load_packages:
-        print('entrar entra')
         self._hook_load_packages(pre)
       if self._language is 'es_ES':
         pre.append(_es_ES)
