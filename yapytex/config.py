@@ -1,8 +1,8 @@
 import sys
 import yaml
-from library.yapytex import console as cons
-from library.yapytex.fs_utils import error_if_not_file_exists
-from library.yapytex.dictutils import DictWrapper
+from yapytex import console as cons
+from yapytex.fs_utils import error_if_not_file_exists
+from yapytex.dictutils import DictWrapper
 
 class Settings(DictWrapper):
   _settings = None

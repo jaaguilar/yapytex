@@ -1,5 +1,5 @@
 import os
-from library.yapytex import console as cons
+from yapytex import console as cons
 
 def file_exists(path):
   return os.path.isfile(path)

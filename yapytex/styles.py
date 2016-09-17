@@ -1,4 +1,4 @@
-from library.yapytex.dictutils import DictWrapper
+from yapytex.dictutils import DictWrapper
 
 _d_paper_type = dict(
   a4paper = r'a4paper'

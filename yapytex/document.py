@@ -1,9 +1,9 @@
-from library.yapytex.dictutils import DictWrapper
-from library.yapytex import latex_directives as xdir
-from library.yapytex import styles
-from library.yapytex import miscelanea as misc
-from library.yapytex.pieces import YaPyTextPiece
-from library.yapytex.abstract import YaPyTextBase
+from yapytex.dictutils import DictWrapper
+from yapytex import latex_directives as xdir
+from yapytex import styles
+from yapytex import miscelanea as misc
+from yapytex.pieces import YaPyTextPiece
+from yapytex.abstract import YaPyTextBase
 
 _d_misc_options = dict(
   numbered = r'numbered',

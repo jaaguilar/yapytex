@@ -1,10 +1,10 @@
-from library.yapytex.dictutils import DictWrapper
-from library.yapytex.config import settings as conf
-import library.yapytex.latex_directives as xdir
-from library.yapytex import styles
-from library.yapytex import languages
-from library.yapytex.pieces import YaPyTextPiece
-from library.yapytex.document import Document
+from yapytex.dictutils import DictWrapper
+from yapytex.config import settings as conf
+import yapytex.latex_directives as xdir
+from yapytex import styles
+from yapytex import languages
+from yapytex.pieces import YaPyTextPiece
+from yapytex.document import Document
 
 if conf.debug:
   conf.print_settings()
