@@ -1,7 +1,7 @@
 import sys
 from faker import Factory
 from library.yapytex import styles
-from library.yapytex.base import YaPyTexLibrary, quote
+from library.yapytex.yapytex import YaPyTexLibrary, quote
 from latex import build_pdf, LatexBuildError
 
 tex = YaPyTexLibrary()

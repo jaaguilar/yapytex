@@ -1,7 +1,8 @@
 from library.yapytex.dictutils import DictWrapper
 from library.yapytex import latex_directives as xdir
 from library.yapytex import styles
-from library.yapytex.pieces import YaPyTextPiece, _format
+from library.yapytex import miscelanea as misc
+from library.yapytex.pieces import YaPyTextPiece
 from library.yapytex.abstract import YaPyTextBase
 
 _d_misc_options = dict(
@@ -103,7 +104,7 @@ class Document(YaPyTextBase):
     if self._title:
       post_header.append(xdir.maketitle)
       post_header.append(xdir.cleardoublepage)
-    pieces = map(_format,self._pieces)
+    pieces = map(misc.format,self._pieces)
     footer = []
     if xdir.useglossaries in pre_header and len(self._glossary) > 0:
       footer.append(xdir.print_glossaries)
