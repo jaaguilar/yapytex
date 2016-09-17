@@ -1,0 +1,2 @@
+class YaPyTextBase(object):
+  pass
