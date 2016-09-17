@@ -2,8 +2,8 @@ from yapytex.dictutils import DictWrapper
 from yapytex import latex_directives as xdir
 from yapytex import styles
 from yapytex import miscelanea as misc
-from yapytex.pieces import YaPyTextPiece
-from yapytex.abstract import YaPyTextBase
+from yapytex.pieces import YaPyTexPiece
+from yapytex.abstract import YaPyTexBase
 
 _d_misc_options = dict(
   numbered = r'numbered',
@@ -21,7 +21,7 @@ _default_doc_options = [
   misc_options.index,
 ]
 
-class Document(YaPyTextBase):
+class Document(YaPyTexBase):
   _preface = []
   _pre = []
   _glossary = []
@@ -64,8 +64,8 @@ class Document(YaPyTextBase):
     self._author = author
 
   def add(self, piece):
-    if not isinstance(piece,YaPyTextPiece):
-      raise Exception('Piece argument must be YaPyTextPiece instance.')
+    if not isinstance(piece,YaPyTexPiece):
+      raise Exception('Piece argument must be YaPyTexPiece instance.')
     self._pieces.append(piece)
 
   def build(self,ttype):

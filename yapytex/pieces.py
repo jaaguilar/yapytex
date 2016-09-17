@@ -1,4 +1,4 @@
-class YaPyTextPiece(object):
+class YaPyTexPiece(object):
   _prefix = ''
   _sufix = ''
   _piece = ''
@@ -12,10 +12,10 @@ class YaPyTextPiece(object):
   def childs(self):
     return self._childs
   def add_child(self,piece,label=''):
-    self._childs.append(YaPyTextPiece(piece,label))
+    self._childs.append(YaPyTexPiece(piece,label))
   def add_piece(self,piece):
-    if not isinstance(piece,YaPyTextPiece):
-      raise Exception('Piece argument must be YaPyTextPiece instance.')
+    if not isinstance(piece,YaPyTexPiece):
+      raise Exception('Piece argument must be YaPyTexPiece instance.')
     self._childs.append(piece)
   def __init__(self,piece,label='',prefix='',sufix=''):
     self._piece = piece

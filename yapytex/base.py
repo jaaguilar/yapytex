@@ -1,2 +1,2 @@
-class YaPyTextBase(object):
+class YaPyTexBase(object):
   pass

@@ -3,7 +3,7 @@ from yapytex.config import settings as conf
 import yapytex.latex_directives as xdir
 from yapytex import styles
 from yapytex import languages
-from yapytex.pieces import YaPyTextPiece
+from yapytex.pieces import YaPyTexPiece
 from yapytex.document import Document
 
 if conf.debug:
@@ -59,16 +59,16 @@ class YaPyTexLibrary(object):
 
   def add_chapter(self,title):
     self._doc._type = 'book'
-    self._doc.add(YaPyTextPiece('\\chapter{{{0}}}'.format(title)))
+    self._doc.add(YaPyTexPiece('\\chapter{{{0}}}'.format(title)))
 
   def add_paragraph(self,par_text,size=styles.font_sizes.normal,label=''):
-    self._doc.add(YaPyTextPiece('{{{0}\n{1}\\par}}'.format(size,par_text),label))
+    self._doc.add(YaPyTexPiece('{{{0}\n{1}\\par}}'.format(size,par_text),label))
 
   def add_section(self,title,text=''):
-    self._doc.add(YaPyTextPiece('\\section{{{0}}}{1}\n'.format(title,text)))
+    self._doc.add(YaPyTexPiece('\\section{{{0}}}{1}\n'.format(title,text)))
 
   def add_subsection(self,title,text=''):
-    self._doc.add(YaPyTextPiece('\\subsection{{{0}}}{1}\n'.format(title,text)))
+    self._doc.add(YaPyTexPiece('\\subsection{{{0}}}{1}\n'.format(title,text)))
 
   def add_enumeration(self,items,ccontinue=False,close=True):
     if len(items) > 0:
@@ -81,7 +81,7 @@ class YaPyTexLibrary(object):
       phrase = begin_token+'\n\\item '.join(items)+end_token
       #print(phrase)
       #wait = input('--parada -o- tecnica--')
-      self._doc.add(YaPyTextPiece(phrase))
+      self._doc.add(YaPyTexPiece(phrase))
 
   def add_acronym_entry(self,entry,text):
     if not xdir.useglossaries in self._doc._pre:
@@ -96,11 +96,11 @@ class YaPyTexLibrary(object):
     return xdir.gls_item.format(entry)
 
   def close_enumeration(self):
-    self._doc.add(YaPyTextPiece('\\end{enumerate}'))
+    self._doc.add(YaPyTexPiece('\\end{enumerate}'))
 
   def add_list_item(self,items):
     if len(items) > 0:
-      self._doc.add(YaPyTextPiece('\\begin{itemize}\n\\item '+'\n\\item '.join(items)+'\\end{itemize}'))
+      self._doc.add(YaPyTexPiece('\\begin{itemize}\n\\item '+'\n\\item '.join(items)+'\\end{itemize}'))
 
   def document(self,ttype):
     #doc.add(doc_content)
