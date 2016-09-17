@@ -1,2 +1,2 @@
 # yapytex
-Yet Another PYthon TEX library
+Yet Another PYthon laTEX package
