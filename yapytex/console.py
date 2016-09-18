@@ -1,6 +1,5 @@
 import sys
 from colorama import init, Fore, Back, Style
-from yapytex import colors
 
 init()
 ConsInfo=Fore.CYAN

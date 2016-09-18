@@ -1,5 +1,7 @@
+import os
 import sys
 import yaml
+from yapytex import __file__ as libfile
 from yapytex import console as cons
 from yapytex.fs_utils import error_if_not_file_exists
 from yapytex.dictutils import DictWrapper
@@ -7,7 +9,7 @@ from yapytex.dictutils import DictWrapper
 class Settings(DictWrapper):
   _settings = None
 
-  def __init__(self, filename='yapytex-config.yaml', lowercase=False, uppercase=False):
+  def __init__(self, filename=os.path.sep.join([os.path.dirname(libfile),'yapytex-config.yaml']), lowercase=False, uppercase=False):
     _filename = filename
     error_if_not_file_exists(_filename)
     with open(_filename, 'r') as ymlfile:
