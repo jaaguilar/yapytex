@@ -2,7 +2,7 @@ import unittest
 from yapytex import styles
 import yapytex.latex_directives as xdir
 from yapytex.yapytex import YaPyTexLibrary
-from yapytex.pieces import YaPyTexPiece, YaPyTexChapter, YaPyTexParagraph, YaPyTexPreface
+from yapytex.pieces import YaPyTexPiece, YaPyTexChapter, YaPyTexParagraph, YaPyTexPreface,YaPyTexSection
 
 def funcion(piece):
   return piece._piece
@@ -29,6 +29,11 @@ class TestPieces(unittest.TestCase):
     preface = YaPyTexPreface(paragraphs)
     preface_str = '\\frontmatter\n\\chapter{Prefacio}\n{\\normalsize\nthis is a paragraph\par}\n{\\normalsize\nthis is another paragraph\\par}\n\\mainmatter'
     self.assertEqual(str(preface),preface_str)
+  def test_section(self):
+    section_title = 'this is a section'
+    section_txt = 'and this is the content of the section'
+    piece = YaPyTexSection(section_title,section_txt)
+    self.assertEqual(str(piece),xdir.section.format(section_title,section_txt))
 
 if __name__ == '__main__':
   test = unittest.main()

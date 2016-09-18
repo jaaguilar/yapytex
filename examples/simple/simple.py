@@ -21,7 +21,6 @@ str_text = 'Hello World... to infinite and beyond!!!'
 tex.add_paragraph(fake.text())
 tex.add_paragraph(str_text,styles.font_sizes.Huge)
 tex.add_paragraph('<<Esto es una quote.>>',styles.font_sizes.Huge)
-
 tex.add_section(fake.name(),fake.text())
 tex.add_paragraph(fake.text())
 

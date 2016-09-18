@@ -3,7 +3,7 @@ from yapytex.config import settings as conf
 import yapytex.latex_directives as xdir
 from yapytex import styles
 from yapytex import languages
-from yapytex.pieces import YaPyTexPiece, YaPyTexChapter, YaPyTexParagraph
+from yapytex.pieces import YaPyTexPiece, YaPyTexChapter, YaPyTexParagraph, YaPyTexPreface
 from yapytex.document import Document
 
 if conf.debug:
@@ -63,11 +63,8 @@ class YaPyTexLibrary(object):
     self._doc.add(piece)
     return piece
 
-  def add_preface(self):
-    pass
-    #piece = YaPyTexPiece('',prefix=xdir.frontmatter,sufix=xdir.mainmatter)
-    #self._doc.add(piece)
-    #return piece
+  def add_preface(self,children):
+    YaPyTexPreface(children)
 
   def add_paragraph(self,par_text,size=styles.font_sizes.normal,label=''):
     piece = YaPyTexParagraph(par_text,size,label)

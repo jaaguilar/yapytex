@@ -50,3 +50,9 @@ class YaPyTexPreface(YaPyTexPiece):
   def __init__(self,children=[]):
     super(self.__class__, self).__init__(xdir.chapter.format('Prefacio'),prefix=xdir.frontmatter,sufix=xdir.mainmatter)
     self.add_children(children)
+
+class YaPyTexSection(YaPyTexPiece):
+  def __init__(self,title,text):
+    super(self.__class__, self).__init__(xdir.section.format(title,text))
+
+
