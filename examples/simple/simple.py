@@ -18,11 +18,15 @@ fake = Factory.create('es_ES')
 
 str_text = 'Hello World... to infinite and beyond!!!'
 
-tex.add_paragraph(fake.text())
-tex.add_paragraph(str_text,styles.font_sizes.Huge)
-tex.add_paragraph('<<Esto es una quote.>>',styles.font_sizes.Huge)
-tex.add_section(fake.name(),fake.text())
-tex.add_paragraph(fake.text())
+children = []
+
+children.append(tex.add_paragraph(fake.text(),doc_append=False))
+children.append(tex.add_paragraph(str_text,styles.font_sizes.Huge,doc_append=False))
+children.append(tex.add_paragraph('<<Esto es una quote.>>',styles.font_sizes.Huge,doc_append=False))
+children.append(tex.add_section(fake.name(),fake.text(),doc_append=False))
+children.append(tex.add_paragraph(fake.text(),doc_append=False))
+
+tex.add_preface(children)
 
 tex.add_chapter('Esto es un capítulo')
 

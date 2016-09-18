@@ -3,7 +3,7 @@ from yapytex.config import settings as conf
 import yapytex.latex_directives as xdir
 from yapytex import styles
 from yapytex import languages
-from yapytex.pieces import YaPyTexPiece, YaPyTexChapter, YaPyTexParagraph, YaPyTexPreface
+from yapytex.pieces import YaPyTexPiece, YaPyTexChapter, YaPyTexParagraph, YaPyTexPreface, YaPyTexSection
 from yapytex.document import Document
 
 if conf.debug:
@@ -64,15 +64,21 @@ class YaPyTexLibrary(object):
     return piece
 
   def add_preface(self,children):
-    YaPyTexPreface(children)
-
-  def add_paragraph(self,par_text,size=styles.font_sizes.normal,label=''):
-    piece = YaPyTexParagraph(par_text,size,label)
+    piece = YaPyTexPreface(children)
     self._doc.add(piece)
     return piece
 
-  def add_section(self,title,text=''):
-    self._doc.add(YaPyTexPiece('\\section{{{0}}}{1}\n'.format(title,text)))
+  def add_paragraph(self,par_text,size=styles.font_sizes.normal,label='',doc_append=True):
+    piece = YaPyTexParagraph(par_text,size,label)
+    if doc_append:
+      self._doc.add(piece)
+    return piece
+
+  def add_section(self,title,text='',doc_append=True):
+    piece = YaPyTexSection(title,text)
+    if doc_append:
+      self._doc.add(piece)
+    return piece
 
   def add_subsection(self,title,text=''):
     self._doc.add(YaPyTexPiece('\\subsection{{{0}}}{1}\n'.format(title,text)))
