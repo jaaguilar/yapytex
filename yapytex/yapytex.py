@@ -3,7 +3,7 @@ from yapytex.config import settings as conf
 import yapytex.latex_directives as xdir
 from yapytex import styles
 from yapytex import languages
-from yapytex.pieces import YaPyTexPiece
+from yapytex.pieces import YaPyTexPiece, YaPyTexChapter, YaPyTexParagraph
 from yapytex.document import Document
 
 if conf.debug:
@@ -59,10 +59,20 @@ class YaPyTexLibrary(object):
 
   def add_chapter(self,title):
     self._doc._type = 'book'
-    self._doc.add(YaPyTexPiece(xdir.chapter.format(title)))
+    piece = YaPyTexChapter(title)
+    self._doc.add(piece)
+    return piece
+
+  def add_preface(self):
+    pass
+    #piece = YaPyTexPiece('',prefix=xdir.frontmatter,sufix=xdir.mainmatter)
+    #self._doc.add(piece)
+    #return piece
 
   def add_paragraph(self,par_text,size=styles.font_sizes.normal,label=''):
-    self._doc.add(YaPyTexPiece('{{{0}\n{1}\\par}}'.format(size,par_text),label))
+    piece = YaPyTexParagraph(par_text,size,label)
+    self._doc.add(piece)
+    return piece
 
   def add_section(self,title,text=''):
     self._doc.add(YaPyTexPiece('\\section{{{0}}}{1}\n'.format(title,text)))

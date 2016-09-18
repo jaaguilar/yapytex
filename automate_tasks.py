@@ -13,14 +13,13 @@ print('project name ',project_name)
 #force install package
 print('installing package...')
 res = run(['pip','install','--upgrade','--force-reinstall','--no-deps','.'])
-print('pip install res',res)
 if res.returncode:
   raise Exception('pip failed!')
 #run tests
 print('running tests...')
 res = run(['python', './tests/test_pieces.py'])
 if res.returncode:
-  raise Exception('test not found!')
+  raise Exception('test not passed!')
 #git add
 print('git add...')
 run(['git', 'add', '.'])
