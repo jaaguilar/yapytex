@@ -1,9 +1,12 @@
 import os
 from subprocess import call
 
-print(os.environ['GITHUB_USER'])
-print(os.environ['GITHUB_PASSWORD'])
+github_user = os.environ['GITHUB_USER']
+github_passwd = os.environ['GITHUB_PASSWORD']
+project_name = os.environ['PROJECT_NAME']
 
+#project name
+print('project name ',project_name)
 #force install package
 print('installing package...')
 res = call(['pip','install','--upgrade','--force-reinstall','--no-deps','.'])
@@ -29,9 +32,8 @@ else:
 
 #git push origin  
 print('git push origin master...')
-push_ok = input('do you want to push changes to remote? [y/N]: ') or 'n'
+push_ok = input('Do you want to push changes to remote? [y/N]: ') or 'n'
 if push_ok != 'n':
-  #call(['git', 'commit', '-m', message])
-  print('OK')
+  call(['git','push','https://{0}:{1}@github.com/{0}/{2}'.format(github_user,github_passwd,project_name),'master'])
 else:
-  print('git commit skipped.')  
+  print('git push skipped.')  

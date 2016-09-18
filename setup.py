@@ -14,5 +14,6 @@ setup(
   author_email='juanantonioaguilar@gmail.com',
   url='https://github.com/jasset75/yapytex',
   packages=['yapytex'],
+  package_data={'yapytex': ['yapytex-config.yaml']},
   install_requires=reqs,
 )
