@@ -59,7 +59,7 @@ class YaPyTexLibrary(object):
 
   def add_chapter(self,title):
     self._doc._type = 'book'
-    self._doc.add(YaPyTexPiece('\\chapter{{{0}}}'.format(title)))
+    self._doc.add(YaPyTexPiece(xdir.chapter.format(title)))
 
   def add_paragraph(self,par_text,size=styles.font_sizes.normal,label=''):
     self._doc.add(YaPyTexPiece('{{{0}\n{1}\\par}}'.format(size,par_text),label))
