@@ -52,10 +52,17 @@ class YaPyTexPreface(YaPyTexPiece):
     self.add_children(children)
 
 class YaPyTexSection(YaPyTexPiece):
-  def __init__(self,title,text,unnumbered):
+  def __init__(self,title,text,unnumbered,label=''):
     asterisk = '*'
     if not unnumbered:
       asterisk = ''
-    super(self.__class__, self).__init__(xdir.section.format(title,text,asterisk))
+    if label:
+      piece = xdir.labeled_section.format(title,text,asterisk,label)
+    else:
+      piece = xdir.section.format(title,text,asterisk)
+    super(self.__class__,self).__init__(piece)
 
-
+class YaPyTexAppendix(YaPyTexSection):
+  def __init__(self,title,text,unnumbered,label,children=[]):
+    super(self.__class__,self).__init__(title,text,unnumbered,label=label)
+    self.add_children(children)

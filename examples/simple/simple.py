@@ -112,11 +112,16 @@ Añado otra párrafo con referencia a un acrónimo usado anteriormente a ver
 que pasa {0} y si va bien lo repito con una {1}
 """.format(tex.add_acronym_entry('HTML'),tex.add_glossary_entry('enumeracion','enumeracion')))
 
-
+text = """
+An addendum, in general, is an addition required to be made to a document by its author 
+subsequent to its printing or publication. It comes from the Latin verbal phrase addendum est, 
+being the gerundive form of the verb addo, addere, addidi, additum, 
+"to give to, add to",[1] meaning "(that which) must be added". 
+Addenda is from the plural form addenda sunt, "(those things) which must be added".
+"""
+tex.add_appendix('Apendice A','AppendixA',text)
 
 doc = tex.document(ttype='book')
-
-
 
 # this builds a pdf-file inside a temporary directory
 print(doc)

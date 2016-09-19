@@ -5,6 +5,9 @@ from yapytex import miscelanea as misc
 from yapytex.pieces import YaPyTexPiece
 from yapytex.abstract import YaPyTexBase
 
+#book layout
+#https://en.wikipedia.org/wiki/Book_design
+
 _d_misc_options = dict(
   numbered = r'numbered',
   pprint = r'print',
@@ -22,7 +25,7 @@ _default_doc_options = [
 ]
 
 class Document(YaPyTexBase):
-  _preface = []
+  _appendices = []
   _pre = []
   _glossary = []
   _acronym = []
@@ -69,6 +72,11 @@ class Document(YaPyTexBase):
       raise Exception('Piece argument must be YaPyTexPiece instance.')
     self._pieces.append(piece)
 
+  def add_appendix(self, appendix):
+    if not isinstance(appendix,YaPyTexAppendix):
+      raise Exception('Appendix argument must be YaPyTexAppendix instance.')
+    self._appendices.append(appendix)
+
   def build(self,ttype):
     pre_header = [
       xdir.doc_class.format(','.join(_default_doc_options),ttype),
@@ -86,38 +94,35 @@ class Document(YaPyTexBase):
     if self._author:
       pre_header.append(xdir.doc_author.format(self._author))
     
-
     if xdir.useglossaries in pre_header and len(self._glossary) > 0:
-    #  name_gloss_file = '_glossary'
-    #  with open(name_gloss_file+'.tex', 'w') as file:
-    #    file.write('\n'.join(self._glossary))
-    #  pre_header.append(_load_glossary.format(name_gloss_file))  
       pre_header.append(xdir.make_glossaries)
       pre_header.append(xdir.gls_entry_italic)
-
 
     header = []
     #document's begin
     header.append(xdir.doc_begin)
 
-    post_header = self._preface
+
+    post_header = []
 
     if self._title:
       post_header.append(xdir.maketitle)
       post_header.append(xdir.cleardoublepage)
+    post_header.append(xdir.tableofcontents)
     pieces = map(misc.format,self._pieces)
-    footer = []
+    backmatter = xdir.backmatter
+    backmatter.extend(self._appendices)
     if xdir.useglossaries in pre_header and len(self._glossary) > 0:
-      footer.append(xdir.print_glossaries)
+      backmatter.append(xdir.print_glossaries)
     if xdir.useglossaries in pre_header and len(self._acronym) > 0:
-      footer.append(xdir.print_acronyms)
-    #this line may be the last of footer
-    footer.append(xdir.doc_end)
+      backmatter.append(xdir.print_acronyms)
     pre_header.extend(self._glossary)
     pre_header.extend(self._acronym)
+    #this line may be the last of directives
+    backmatter.append(xdir.doc_end)
     return \
       '\n'.join(pre_header)+\
       '\n'.join(header)+\
       '\n'.join(post_header)+\
       '\n'.join(pieces)+'\n'+\
-      '\n'.join(footer)
+      '\n'.join(backmatter)

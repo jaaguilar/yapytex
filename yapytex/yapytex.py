@@ -3,7 +3,13 @@ from yapytex.config import settings as conf
 import yapytex.latex_directives as xdir
 from yapytex import styles
 from yapytex import languages
-from yapytex.pieces import YaPyTexPiece, YaPyTexChapter, YaPyTexParagraph, YaPyTexPreface, YaPyTexSection
+from yapytex.pieces import \
+  YaPyTexPiece,\
+  YaPyTexChapter,\
+  YaPyTexParagraph,\
+  YaPyTexPreface,\
+  YaPyTexSection,\
+  YaPyTexAppendix
 from yapytex.document import Document
 
 if conf.debug:
@@ -74,6 +80,13 @@ class YaPyTexLibrary(object):
 
   def add_subsection(self,title,text=''):
     self._doc.add(YaPyTexPiece('\\subsection{{{0}}}{1}\n'.format(title,text)))
+
+  def add_appendix(self,title,label,text,children=[]):
+    piece = YaPyTexAppendix(title,text,False,label,children)
+    if doc_append:
+      self._doc.add_appendix(piece)
+    return piece
+
 
   def add_enumeration(self,items,ccontinue=False,close=True):
     if len(items) > 0:
