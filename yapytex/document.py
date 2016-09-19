@@ -25,6 +25,7 @@ class Document(YaPyTexBase):
   _preface = []
   _pre = []
   _glossary = []
+  _acronym = []
   _pieces = []
   _title = None
   _author = None
@@ -108,9 +109,12 @@ class Document(YaPyTexBase):
     footer = []
     if xdir.useglossaries in pre_header and len(self._glossary) > 0:
       footer.append(xdir.print_glossaries)
+    if xdir.useglossaries in pre_header and len(self._acronym) > 0:
+      footer.append(xdir.print_acronyms)
     #this line may be the last of footer
     footer.append(xdir.doc_end)
     pre_header.extend(self._glossary)
+    pre_header.extend(self._acronym)
     return \
       '\n'.join(pre_header)+\
       '\n'.join(header)+\

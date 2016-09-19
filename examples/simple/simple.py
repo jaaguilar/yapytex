@@ -106,8 +106,17 @@ items = [fake.name() for i in range(10)]
 tex.add_enumeration(items)
 items = [fake.name() for i in range(5)]
 tex.add_enumeration(items,ccontinue=True,close=True)
-#tex.add_paragraph('\\item \\blindtext')
+
+tex.add_paragraph("""
+Añado otra párrafo con referencia a un acrónimo usado anteriormente a ver
+que pasa {0} y si va bien lo repito con una {1}
+""".format(tex.add_acronym_entry('HTML'),tex.add_glossary_entry('enumeracion','enumeracion')))
+
+
+
 doc = tex.document(ttype='book')
+
+
 
 # this builds a pdf-file inside a temporary directory
 print(doc)

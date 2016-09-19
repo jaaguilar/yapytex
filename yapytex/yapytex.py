@@ -88,16 +88,20 @@ class YaPyTexLibrary(object):
       #wait = input('--parada -o- tecnica--')
       self._doc.add(YaPyTexPiece(phrase))
 
-  def add_acronym_entry(self,entry,text):
+  def add_acronym_entry(self,entry,text=''):
     if not xdir.useglossaries in self._doc._pre:
       self._doc._pre.append(xdir.useglossaries)
-    self._doc._glossary.append(xdir.acronym_new.format(entry,entry,text))
+    pattern = xdir.partial_acronym.format(entry,entry)
+    if not any(pattern in s for s in self._doc._acronym):
+      self._doc._acronym.append(xdir.acronym_new.format(entry,entry,text))
     return xdir.gls_item.format(entry)
 
-  def add_glossary_entry(self,entry,label,text):
+  def add_glossary_entry(self,entry,label,text=''):
     if not xdir.useglossaries in self._doc._pre:
       self._doc._pre.append(xdir.useglossaries)
-    self._doc._glossary.append(xdir.glossary_new.format(entry,label,text))
+    pattern = 'name={0}'.format(entry)
+    if not any(pattern in s for s in self._doc._glossary):
+      self._doc._glossary.append(xdir.glossary_new.format(entry,label,text))
     return xdir.gls_item.format(entry)
 
   def close_enumeration(self):
