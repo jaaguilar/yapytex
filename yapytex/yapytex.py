@@ -49,14 +49,6 @@ class YaPyTexLibrary(object):
     else:
       return '\\ref{{{0}}}'.format(label)
 
-  def url(self,url,text='',brackets=True):
-    if not text:
-      text = url
-    if brackets:
-      return ' \\hyperref[{0}]{{{1} [\\ref*{{{0}}}] }}'.format(url,text)
-    else:
-      return ' \\hyperref[{0}]{{{1} \\ref*{{{0}}} }}'.format(url,text)
-
   def add_chapter(self,title):
     self._doc._type = 'book'
     piece = YaPyTexChapter(title)
@@ -74,8 +66,8 @@ class YaPyTexLibrary(object):
       self._doc.add(piece)
     return piece
 
-  def add_section(self,title,text='',doc_append=True):
-    piece = YaPyTexSection(title,text)
+  def add_section(self,title,text='',doc_append=True,unnumbered=False):
+    piece = YaPyTexSection(title,text,unnumbered)
     if doc_append:
       self._doc.add(piece)
     return piece

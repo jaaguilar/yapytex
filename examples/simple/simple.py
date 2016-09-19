@@ -23,7 +23,7 @@ children = []
 children.append(tex.add_paragraph(fake.text(),doc_append=False))
 children.append(tex.add_paragraph(str_text,styles.font_sizes.Huge,doc_append=False))
 children.append(tex.add_paragraph('<<Esto es una quote.>>',styles.font_sizes.Huge,doc_append=False))
-children.append(tex.add_section(fake.name(),fake.text(),doc_append=False))
+children.append(tex.add_section(fake.name(),fake.text(),doc_append=False,unnumbered=True))
 children.append(tex.add_paragraph(fake.text(),doc_append=False))
 
 tex.add_preface(children)
@@ -47,7 +47,7 @@ On the other hand, we denounce with righteous indignation
    The wise man therefore always holds in these matters 
    to this principle of selection: he rejects pleasures to 
    secure other greater pleasures, or else he endures pains to avoid worse pains.  
-""",label='marca1')
+""",label='marca_interna_1')
 
 
 tex.add_section(fake.name(),"""
@@ -60,15 +60,14 @@ But I must explain to you how all this mistaken idea of denouncing pleasure and 
    know how to pursue pleasure rationally encounter consequences that are extremely painful. 
    Nor again is there anyone who loves or pursues or desires to obtain pain of itself, 
    because it is pain, but because occasionally circumstances occur in which toil and pain
-    can procure him some great pleasure{0} {1} {2} {3}.  To take a trivial example, which of us ever 
+    can procure him some great pleasure{0} {1} {2}.  To take a trivial example, which of us ever 
     undertakes laborious physical exercise, except to obtain some advantage 
     from it? But who has any right to find fault with a man who chooses to enjoy a 
     pleasure that has no annoying consequences, or one who avoids a pain that 
     produces no resultant pleasure?
 """.format(
-  tex.ref('marca1'),
-  tex.url('https://en.wikipedia.org/wiki/LaTeX','Esto es una URL'),
-  tex.href('Una marca','https://en.wikipedia.org/wiki/LaTeX'),
+  tex.ref('marca_interna_1'),
+  tex.href('Una url externa','https://en.wikipedia.org/wiki/LaTeX'),
   tex.href('Un fichero','run:./form_letter.pdf')))
 
 tex.add_section(fake.name())
@@ -115,7 +114,13 @@ print(doc)
 wait = input('-- stop --')
 
 #try:
-pdf = build_pdf(doc)
+with open('ex1.tex', 'w') as f:
+  try:
+    f.write(doc)
+  finally:
+    f.close()
+
+#pdf = build_pdf(doc)
 #except LatexBuildError as e:
 #  for err in e.get_errors():
 #    print(u'Error in {0[filename]}, line {0[line]}: {0[error]}'.format(err))
@@ -123,5 +128,5 @@ pdf = build_pdf(doc)
 #    print(u'    {}'.format(err['context'][1]))
 
 # look at the first few bytes of the header
-pdf.save_to('ex1.pdf')
+#pdf.save_to('ex1.pdf')
 print('Finished!')

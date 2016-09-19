@@ -32,8 +32,8 @@ class TestPieces(unittest.TestCase):
   def test_section(self):
     section_title = 'this is a section'
     section_txt = 'and this is the content of the section'
-    piece = YaPyTexSection(section_title,section_txt)
-    self.assertEqual(str(piece),xdir.section.format(section_title,section_txt))
+    piece = YaPyTexSection(section_title,section_txt,unnumbered=False)
+    self.assertEqual(str(piece),xdir.section.format(section_title,section_txt,''))
 
 if __name__ == '__main__':
   test = unittest.main()
