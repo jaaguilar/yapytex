@@ -5,11 +5,21 @@ command = ['bash','-c','source ./environment.sh']
 res = run(command)
 if res.returncode:
   raise Exception('set up environment failed!')
-github_user = os.environ['GITHUB_USER']
-github_passwd = os.environ['GITHUB_PASSWORD']
-project_name = os.environ['PROJECT_NAME']
+try:
+  github_user = os.environ['GITHUB_USER']
+  github_passwd = os.environ['GITHUB_PASSWORD']
+  project_name = os.environ['PROJECT_NAME']
+except:
+  raise Exception('Environment variables not found. Please, try: "source environment.sh" from project root folder.')
 #project name
 print('project name ',project_name)
+#pull from origin
+req = input('pull from origin to master? [y/N]: ') or 'n'
+if req.lower() == 'y':
+  print('pulling from origin to master branch')
+  res = run(['git','pull','origin','master'])
+else:
+  print('pull skipped.')
 #force install package
 print('installing package...')
 res = run(['pip','install','--upgrade','--force-reinstall','--no-deps','.'])
@@ -35,7 +45,7 @@ else:
 #git push origin  
 push_ok = input('Do you want to push changes to remote? [y/N]: ') or 'n'
 print('git push origin master...')
-if push_ok != 'n':
+if push_ok.lower() == 'y':
   run(['git','push','https://{0}:{1}@github.com/{0}/{2}'.format(github_user,github_passwd,project_name),'master'])
 else:
   print('git push skipped.')  
