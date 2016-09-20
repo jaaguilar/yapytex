@@ -5,6 +5,7 @@ from yapytex import styles
 from yapytex import languages
 from yapytex.pieces import \
   YaPyTexPiece,\
+  YaPyTexLipsum,\
   YaPyTexChapter,\
   YaPyTexParagraph,\
   YaPyTexPreface,\
@@ -66,14 +67,19 @@ class YaPyTexLibrary(object):
     self._doc.add(piece)
     return piece
 
-  def add_paragraph(self,par_text,size=styles.font_sizes.normal,label='',doc_append=True):
-    piece = YaPyTexParagraph(par_text,size,label)
+  def add_paragraph(self,par_text='',size=styles.font_sizes.normal,label='',doc_append=True,lipsum=0):
+    children = []
+    if lipsum:
+      children = [YaPyTexLipsum(lipsum)]
+    piece = YaPyTexParagraph(par_text,size,label,children=children)
+
     if doc_append:
       self._doc.add(piece)
     return piece
 
-  def add_section(self,title,text='',doc_append=True,unnumbered=False):
+  def add_section(self,title,text='',doc_append=True,unnumbered=False,children=[]):
     piece = YaPyTexSection(title,text,unnumbered)
+    piece.add_children(children)
     if doc_append:
       self._doc.add(piece)
     return piece
@@ -81,8 +87,8 @@ class YaPyTexLibrary(object):
   def add_subsection(self,title,text=''):
     self._doc.add(YaPyTexPiece('\\subsection{{{0}}}{1}\n'.format(title,text)))
 
-  def add_appendix(self,title,label,text,children=[]):
-    piece = YaPyTexAppendix(title,text,False,label,children)
+  def add_appendix(self,title,label,text,doc_append=True,children=[]):
+    piece = YaPyTexAppendix(title,text,label,children)
     if doc_append:
       self._doc.add_appendix(piece)
     return piece
@@ -127,3 +133,9 @@ class YaPyTexLibrary(object):
   def document(self,ttype):
     #doc.add(doc_content)
     return self._doc.build(self._doc._type)
+
+  def add_lipsum(self,number_of_paragraphs=1,doc_append=True):
+    piece = YaPyTexLipsum(number_of_paragraphs)
+    if doc_append:
+      self._doc.add(piece)
+    return piece

@@ -2,8 +2,8 @@ from yapytex.dictutils import DictWrapper
 from yapytex import latex_directives as xdir
 from yapytex import styles
 from yapytex import miscelanea as misc
-from yapytex.pieces import YaPyTexPiece
 from yapytex.abstract import YaPyTexBase
+from yapytex.pieces import YaPyTexPiece, YaPyTexAppendix
 
 #book layout
 #https://en.wikipedia.org/wiki/Book_design
@@ -110,8 +110,8 @@ class Document(YaPyTexBase):
       post_header.append(xdir.cleardoublepage)
     post_header.append(xdir.tableofcontents)
     pieces = map(misc.format,self._pieces)
-    backmatter = xdir.backmatter
-    backmatter.extend(self._appendices)
+    backmatter = [xdir.backmatter]
+    backmatter.append('\n'.join(map(misc.format,self._appendices)))
     if xdir.useglossaries in pre_header and len(self._glossary) > 0:
       backmatter.append(xdir.print_glossaries)
     if xdir.useglossaries in pre_header and len(self._acronym) > 0:
@@ -124,5 +124,5 @@ class Document(YaPyTexBase):
       '\n'.join(pre_header)+\
       '\n'.join(header)+\
       '\n'.join(post_header)+\
-      '\n'.join(pieces)+'\n'+\
+      '\n'.join(pieces)+\
       '\n'.join(backmatter)

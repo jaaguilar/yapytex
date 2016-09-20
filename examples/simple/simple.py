@@ -123,6 +123,13 @@ tex.add_appendix('Apendice A','AppendixA',text)
 
 doc = tex.document(ttype='book')
 
+children = [tex.add_lipsum(doc_append=False)]
+children.append(tex.add_paragraph(lipsum=3,doc_append=False))
+
+
+import pdb; pdb.set_trace()
+tex.add_section('Lorem Ipsum Dolor...',children=children)
+
 # this builds a pdf-file inside a temporary directory
 print(doc)
 wait = input('-- stop --')

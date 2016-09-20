@@ -18,7 +18,7 @@ class TestPieces(unittest.TestCase):
   def test_paragraph(self):
     par = 'this is a paragraph'
     piece = YaPyTexParagraph(par,size=styles.font_sizes.normal)
-    self.assertEqual(str(piece),'{{{0}\n{1}\\par}}'.format(styles.font_sizes.normal,par))
+    self.assertEqual(str(piece),'{{{0}\n{1}\n\\par}}'.format(styles.font_sizes.normal,par))
   def test_preface(self):
     lib = YaPyTexLibrary()
     paragraphs = []
@@ -27,7 +27,7 @@ class TestPieces(unittest.TestCase):
     par_txt_2 = 'this is another paragraph'
     paragraphs.append(YaPyTexParagraph(par_txt_2,size=styles.font_sizes.normal))
     preface = YaPyTexPreface(paragraphs)
-    preface_str = '\\frontmatter\n\\chapter{Prefacio}\n{\\normalsize\nthis is a paragraph\par}\n{\\normalsize\nthis is another paragraph\\par}\n\\mainmatter'
+    preface_str = '\\frontmatter\n\\chapter{Prefacio}\n{\\normalsize\nthis is a paragraph\n\par}\n{\\normalsize\nthis is another paragraph\n\\par}\n\\mainmatter'
     self.assertEqual(str(preface),preface_str)
   def test_section(self):
     section_title = 'this is a section'

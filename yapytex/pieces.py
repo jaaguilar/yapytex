@@ -43,13 +43,21 @@ class YaPyTexChapter(YaPyTexPiece):
     super(self.__class__, self).__init__(xdir.chapter.format(title))    
     
 class YaPyTexParagraph(YaPyTexPiece):
-  def __init__(self,text,size=styles.font_sizes.normal,label=''):
-    super(self.__class__, self).__init__(xdir.paragraph.format(size,text),label)
+  def __init__(self,text,size=styles.font_sizes.normal,label='',children=[]):
+    super(self.__class__, self).__init__(text,prefix=xdir.par_prefix.format(size),sufix=xdir.par_sufix,label=label)
+    self.add_children(children)
 
 class YaPyTexPreface(YaPyTexPiece):
   def __init__(self,children=[]):
     super(self.__class__, self).__init__(xdir.chapter.format('Prefacio'),prefix=xdir.frontmatter,sufix=xdir.mainmatter)
     self.add_children(children)
+
+class YaPyTexLipsum(YaPyTexPiece):
+  def __init__(self,number_of_paragraphs):
+    if not (isinstance(number_of_paragraphs,int) and number_of_paragraphs > 0):
+      raise('number_of_paragraphs must be a none zero positive integer.')
+    super(self.__class__, self).__init__(xdir.lipsum.format(number_of_paragraphs))
+
 
 class YaPyTexSection(YaPyTexPiece):
   def __init__(self,title,text,unnumbered,label=''):
@@ -62,7 +70,18 @@ class YaPyTexSection(YaPyTexPiece):
       piece = xdir.section.format(title,text,asterisk)
     super(self.__class__,self).__init__(piece)
 
-class YaPyTexAppendix(YaPyTexSection):
+#class YaPyTexAppendix(YaPyTexSection):
+class YaPyTexAppendix(YaPyTexPiece):
+  def __init__(self,title,text,label,children=[]):
+    if label:
+      piece = xdir.labeled_section.format(title,text,'*',label)
+    else:
+      piece = xdir.section.format(title,text,'*')
+    super(self.__class__,self).__init__(piece)
+    self.add_children(children)
+
+"""
   def __init__(self,title,text,unnumbered,label,children=[]):
     super(self.__class__,self).__init__(title,text,unnumbered,label=label)
     self.add_children(children)
+"""    
